@@ -179,19 +179,18 @@ while True:
 
                 elif n == 3:
                     print("Install dependency packages")
-                    subprocess.call(["yum update -y && yum install -y yum-utils && yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm && \
-                                      yum-config-manager --enable remi-php72"],shell=True)
+                    subprocess.call(["yum update -y && yum install -y yum-utils && rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm"],shell=True)
                     print("Install PHP 7.2 along with dependencies.")
-                    subprocess.call(["yum -y install php-common php-cli php-opcache php-bcmath php-dba php-devel php-embedded php-enchant php-gd php-imap php-interbase php-intl php-ldap php-mbstring php-mcrypt php-mysql php-mysqlnd php-odbc php-pdo php-pdo_dblib php-pear php-pecl-apcu php-pecl-imagick php-pecl-memcached php-pecl-mongodb php-pecl-redis php-pecl-xdebug php-pgsql php-phpdbg php-process php-pspell php-recode php-snmp php-soap php-tidy php-xml php-xmlrpc --skip-broken"])
-                    print("安装redis扩展")
-                    subprocess.call(["yum install php-pecl-redis"], shell=True)
+                    subprocess.call(["yum -y install php72w-fpm php72w-devel php72w-cli php72w-bcmath php72w-bz2 php72w-calendar  php72w-ctype php72w-curl php72w-date php72w-dba php72w-dom php72w-exif php72w-fileinfo php72w-filter php72w-ftp php72w-gd php72w-gettext php72w-gmp php72w-hash php72w-iconv php72w-json php72w-libxml php72w-mbstring php72w-mysqlnd php72w-openssl php72w-pcre   php72w-posix php72w-readline php72w-pecl-redis php72w-session php72w-shmop php72w-soap php72w-sockets php72w-standard php72w-sysvmsg php72w-sysvsem php72w-sysvshm php72w-tokenizer php72w-wddx php72w-xml php72w-xmlreader php72w-xmlrpc php72w-xmlwriter php72w-xsl php72w-zip php72w-zlib"], shell=True)
+                    # print("安装redis扩展")
+                    # subprocess.call(["yum install php-pecl-redis"], shell=True)
                     # subprocess.call(["cd /usr/local/src && yum install -y git && git clone https://github.com/phpredis/phpredis.git && cd phpredis && \
                     #                   /usr/local/php/bin/phpize && ./configure --with-php-config=/usr/local/php/bin/php-config && make -j24 && make install && \
                     #                   sed -i '%a extension=redis.so' /etc/php.ini"])
                     print("设置开机自启")
-                    subprocess.call(["systemctl start php-fpm && systemctl enable php-fpm && php -v"], shell=True)
+                    subprocess.call(["systemctl start php-fpm && systemctl enable php-fpm && php-fpm -v"], shell=True)
                     print("Install PHP composer tools")
-                    subprocess.call(["curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer"])
+                    subprocess.call(["curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer"], shell=True)
                     print("打完收工")
 
                 elif n == 4:
