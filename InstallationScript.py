@@ -206,6 +206,8 @@ while True:
                                           rpm -Uvh https://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm"], shell=True)
                     print("Upgrade the latest stable version of the kernel")
                     subprocess.call(["yum --enablerepo=elrepo-kernel install kernel-ml -y && grub2-set-default 0"], shell=True)
+                    # ml是最新版，lt是稳定版
+                    # subprocess.call(["yum --enablerepo=elrepo-kernel install kernel-lt -y && grub2-set-default 0"], shell=True)
                     print("Start-up BBR")
                     subprocess.call(["echo 'net.core.default_qdisc=fq' | tee -a /etc/sysctl.conf && \
                                     echo 'net.ipv4.tcp_congestion_control=bbr' | tee -a /etc/sysctl.conf && sysctl -p"], shell=True)
